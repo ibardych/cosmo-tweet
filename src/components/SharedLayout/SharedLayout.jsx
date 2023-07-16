@@ -14,7 +14,7 @@ const SharedLayout = () => {
   const [isVisible, setIsVisible] = useState(false);
   const isLoading = useSelector((state) => state.loading.isLoading);
 
-  const showHeader = location.pathname !== "/";
+  const showHeader = location.pathname === "/tweets";
 
   useEffect(() => {
     const handleScroll = () => {

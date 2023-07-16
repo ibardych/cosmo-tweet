@@ -14,7 +14,7 @@ export const getAllUsers = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -32,7 +32,7 @@ export const followUser = createAsyncThunk(
 
       return { user: response.data, isFollowing };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

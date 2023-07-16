@@ -4,6 +4,7 @@ import { Navigation, TweetsStyled } from "./Tweets.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "redux/user/operations";
 import { MoreButton } from "components/Styled/Button.styled";
+import Message from "components/Message/Message";
 
 function Tweets() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Tweets() {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [showedUsers, setShowedUsers] = useState([]);
   const scrollRef = useRef(null);
+  const error = useSelector(({ user }) => user.error);
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -75,6 +77,16 @@ function Tweets() {
         {!!showedUsers.length &&
           showedUsers.map((user) => <Card key={user.id} user={user} />)}
       </TweetsStyled>
+
+      {!isLoading && showedUsers.length === 0 && !error && (
+        <Message class="messaage">There are currently no users</Message>
+      )}
+
+      {!isLoading && error && (
+        <Message class="messaage" type="error">
+          {error}
+        </Message>
+      )}
 
       {!isLoading && showedUsers.length < filteredUsers.length && (
         <MoreButton type="button" onClick={() => loadMore(page + 1)}>
