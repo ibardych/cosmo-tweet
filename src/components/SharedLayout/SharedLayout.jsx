@@ -14,7 +14,7 @@ const SharedLayout = () => {
   const [isVisible, setIsVisible] = useState(false);
   const isLoading = useSelector((state) => state.loading.isLoading);
 
-  const showHeader = location.pathname === "/tweets";
+  const hideHeader = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +35,7 @@ const SharedLayout = () => {
     <SharedLayoutStyled>
       <Container>
         {isLoading && <Loader />}
-        {showHeader && <Header />}
+        {!hideHeader && <Header />}
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>

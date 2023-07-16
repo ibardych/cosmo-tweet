@@ -2,8 +2,9 @@ import styled from "@emotion/styled";
 import { colors } from "constants";
 import { transition } from "helpers";
 import avatar from "images/avatar@2x.png";
+import { NavLink } from "react-router-dom";
 
-export const AvatarStyled = styled.div`
+export const AvatarStyled = styled(NavLink)`
   width: 100%;
   height: 8px;
   background: ${colors.color2};

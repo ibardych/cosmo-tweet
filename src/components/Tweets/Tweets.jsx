@@ -1,100 +1,58 @@
-import Card from "components/Card/Card";
-import { useEffect, useRef, useState } from "react";
-import { Navigation, TweetsStyled } from "./Tweets.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "redux/user/operations";
-import { MoreButton } from "components/Styled/Button.styled";
+import { useParams } from "react-router-dom";
+import {
+  Avatar,
+  Date,
+  Text,
+  Tweet,
+  TweetsStyled,
+  Wrapper,
+} from "./Tweets.styled";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import User from "components/User/User";
+import { formatDate } from "helpers";
 import Message from "components/Message/Message";
 
 function Tweets() {
-  const dispatch = useDispatch();
   const isLoading = useSelector(({ loading }) => loading.isLoading);
+  const { userId } = useParams();
   const users = useSelector(({ user }) => user.users);
-  const followedUsers = useSelector(({ user }) => user.followedUsers);
-  const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState(null);
-  const [filteredUsers, setFilteredUsers] = useState([]);
-  const [showedUsers, setShowedUsers] = useState([]);
-  const scrollRef = useRef(null);
+  const [user, setUser] = useState(null);
   const error = useSelector(({ user }) => user.error);
 
   useEffect(() => {
-    dispatch(getAllUsers());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (users.length) {
-      const filteredUsers = users.filter(({ id }) => {
-        const isFollowing = followedUsers.includes(id);
-        if (!filter) return true;
-        if (filter === "following") return isFollowing;
-        if (filter === "follow" && !isFollowing) return true;
-        return false;
-      });
-      setFilteredUsers(filteredUsers);
-      setShowedUsers(filteredUsers.slice(0, page * 3));
+    if (!isLoading) {
+      const result = users.filter((u) => u.id === userId);
+      if (result.length === 1) setUser(result[0]);
     }
-  }, [isLoading, users, followedUsers, filter, page]);
-
-  const loadMore = (page) => {
-    setPage(page);
-    setTimeout(() => {
-      scrollRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
-    }, 100);
-  };
-
-  const handleFilter = (filter) => {
-    setFilter(filter);
-    setPage(1);
-  };
+  }, [isLoading, userId, users]);
 
   return (
-    <>
-      <Navigation>
-        <li
-          className={!filter ? "active" : ""}
-          onClick={() => handleFilter(null)}
-        >
-          All
-        </li>
-        <li
-          className={filter === "follow" ? "active" : ""}
-          onClick={() => handleFilter("follow")}
-        >
-          Follow
-        </li>
-        <li
-          className={filter === "following" ? "active" : ""}
-          onClick={() => handleFilter("following")}
-        >
-          Following
-        </li>
-      </Navigation>
+    <Wrapper>
+      {user && (
+        <>
+          <User user={user} />
 
-      <TweetsStyled>
-        {!!showedUsers.length &&
-          showedUsers.map((user) => <Card key={user.id} user={user} />)}
-      </TweetsStyled>
+          <TweetsStyled>
+            {!isLoading && user.tweets.length === 0 && !error && (
+              <Message class="messaage">There are currently no tweets</Message>
+            )}
 
-      {!isLoading && showedUsers.length === 0 && !error && (
-        <Message class="messaage">There are currently no users</Message>
+            {user &&
+              !!user.tweets.length &&
+              user.tweets.map((tweet, index) => (
+                <Tweet key={index} owner={tweet.owner}>
+                  <Avatar img={tweet.owner ? user.avatar : tweet.avatar} />
+                  <Text>
+                    {tweet.text}
+                    <Date>{formatDate(tweet.date)}</Date>
+                  </Text>
+                </Tweet>
+              ))}
+          </TweetsStyled>
+        </>
       )}
-
-      {!isLoading && error && (
-        <Message class="messaage" type="error">
-          {error}
-        </Message>
-      )}
-
-      {!isLoading && showedUsers.length < filteredUsers.length && (
-        <MoreButton type="button" onClick={() => loadMore(page + 1)}>
-          Load more
-        </MoreButton>
-      )}
-      <div ref={scrollRef} style={{ marginTop: "100px" }}></div>
-    </>
+    </Wrapper>
   );
 }
 

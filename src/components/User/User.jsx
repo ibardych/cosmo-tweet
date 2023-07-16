@@ -1,12 +1,9 @@
-import { svgSprite } from "helpers";
-import { CardStyled, Stat } from "./Card.styled";
-import bg from "images/bg@2x.png";
-import Avatar from "../Avatar/Avatar";
 import { Button } from "components/Styled/Button.styled";
+import { Avatar, Name, Stat, UserStyled } from "./User.styled";
 import { followUser } from "redux/user/operations";
 import { useDispatch, useSelector } from "react-redux";
 
-function Card({ user }) {
+function User({ user }) {
   const dispatch = useDispatch();
   const followedUsers = useSelector(({ user }) => user.followedUsers);
   const { id, followers, tweets, avatar } = user;
@@ -17,17 +14,16 @@ function Card({ user }) {
   };
 
   return (
-    <CardStyled>
-      {svgSprite("logo-goit", "logo")}
-      <img className="bg" src={bg} alt="background" />
-      <Avatar user={user} />
+    <UserStyled>
+      <Avatar img={avatar} />
+      <Name>{user.user}</Name>
       <Stat>{tweets.length.toLocaleString("en-US")} Tweets</Stat>
       <Stat>{followers.toLocaleString("en-US")} Followers</Stat>
       <Button className="button" active={isFollowing} onClick={handleFollow}>
         {isFollowing ? "Following" : "Follow"}
       </Button>
-    </CardStyled>
+    </UserStyled>
   );
 }
 
-export default Card;
+export default User;

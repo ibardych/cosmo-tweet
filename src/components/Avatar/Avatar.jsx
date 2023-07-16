@@ -1,10 +1,10 @@
 import { AvatarStyled, Cirlce, Img } from "./Avatar.styled";
 
-function Avatar({ img }) {
+function Avatar({ user }) {
   return (
-    <AvatarStyled>
+    <AvatarStyled to={`/tweets/${user.id}`}>
       <Cirlce className="avatar">
-        <Img img={img} />
+        <Img img={user.avatar} />
       </Cirlce>
     </AvatarStyled>
   );
