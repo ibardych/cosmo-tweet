@@ -30,7 +30,14 @@ function Home() {
           !!users.length &&
           users
             .slice(0, 10)
-            .map((user) => <User key={user.id} img={user.avatar}></User>)}
+            .map((user) => (
+              <User
+                to={`/tweets/${user.id}`}
+                key={user.id}
+                img={user.avatar}
+                id={user.id}
+              ></User>
+            ))}
       </Users>
     </>
   );
