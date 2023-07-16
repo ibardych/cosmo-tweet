@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cosmo-tweet/static/css/main.8288a6d7.css",
-    "main.js": "/cosmo-tweet/static/js/main.3d54831f.js",
+    "main.js": "/cosmo-tweet/static/js/main.155c26cc.js",
     "static/js/196.c38daf5d.chunk.js": "/cosmo-tweet/static/js/196.c38daf5d.chunk.js",
     "static/js/11.e434af76.chunk.js": "/cosmo-tweet/static/js/11.e434af76.chunk.js",
     "static/js/406.e9ecc580.chunk.js": "/cosmo-tweet/static/js/406.e9ecc580.chunk.js",
@@ -13,7 +13,7 @@
     "static/media/sprite.svg": "/cosmo-tweet/static/media/sprite.857647352a6a2caa0b0d2ff70dc1f9d2.svg",
     "index.html": "/cosmo-tweet/index.html",
     "main.8288a6d7.css.map": "/cosmo-tweet/static/css/main.8288a6d7.css.map",
-    "main.3d54831f.js.map": "/cosmo-tweet/static/js/main.3d54831f.js.map",
+    "main.155c26cc.js.map": "/cosmo-tweet/static/js/main.155c26cc.js.map",
     "196.c38daf5d.chunk.js.map": "/cosmo-tweet/static/js/196.c38daf5d.chunk.js.map",
     "11.e434af76.chunk.js.map": "/cosmo-tweet/static/js/11.e434af76.chunk.js.map",
     "406.e9ecc580.chunk.js.map": "/cosmo-tweet/static/js/406.e9ecc580.chunk.js.map",
@@ -22,6 +22,6 @@
   },
   "entrypoints": [
     "static/css/main.8288a6d7.css",
-    "static/js/main.3d54831f.js"
+    "static/js/main.155c26cc.js"
   ]
 }
