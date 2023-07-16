@@ -25,6 +25,8 @@ export const followUser = createAsyncThunk(
   async ({ id, followers }, thunkAPI) => {
     const tweets = [];
 
+    // Generate user tweets
+    /*
     for (let i = 0; i < Math.round(Math.random() * 1000); i++) {
       tweets.push({
         text: faker.lorem.paragraph(),
@@ -33,6 +35,7 @@ export const followUser = createAsyncThunk(
         owner: Math.round(Math.random()),
       });
     }
+    */
 
     try {
       const state = thunkAPI.getState();

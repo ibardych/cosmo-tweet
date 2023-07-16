@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 function Card({ user }) {
   const dispatch = useDispatch();
   const followedUsers = useSelector(({ user }) => user.followedUsers);
-  const { id, followers, tweets, avatar } = user;
+  const { id, followers, tweets } = user;
   const isFollowing = followedUsers.includes(id);
 
   const handleFollow = async () => {
