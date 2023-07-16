@@ -23,10 +23,9 @@ export const getAllUsers = createAsyncThunk(
 export const followUser = createAsyncThunk(
   "user/follow",
   async ({ id, followers }, thunkAPI) => {
-    const tweets = [];
-
     // Generate user tweets
     /*
+    const tweets = [];
     for (let i = 0; i < Math.round(Math.random() * 1000); i++) {
       tweets.push({
         text: faker.lorem.paragraph(),
@@ -43,7 +42,7 @@ export const followUser = createAsyncThunk(
       const newFollowers = isFollowing ? followers - 1 : followers + 1;
       const response = await instance.put(`/users/${id}`, {
         followers: newFollowers,
-        tweets,
+        // tweets,
       });
 
       return { user: response.data, isFollowing };
