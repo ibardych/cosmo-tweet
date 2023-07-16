@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BACKEND_BASEURL } from "config";
-import { faker } from "@faker-js/faker";
+// import { faker } from "@faker-js/faker";
 
 const instance = axios.create({
   baseURL: BACKEND_BASEURL,
